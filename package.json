@@ -1,10 +1,10 @@
 {
-  "name": "wetube",
+  "name": "hantube",
   "version": "1.0.0",
-  "description": "The best way to watch videos.",
+  "description": "Youtube Clone Challenge",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nomadcoders/wetube-reloaded.git"
+    "url": "git+https://github.com/han-jojo/hantube.git"
   },
   "scripts": {
     "start": "node build/init.js",
@@ -14,12 +14,12 @@
     "dev:server": "nodemon",
     "dev:assets": "webpack --mode=development -w"
   },
-  "author": "Nicolas Serrano <nico@nomadcoders.co>",
+  "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nomadcoders/wetube-reloaded/issues"
+    "url": "https://github.com/han-jojo/hantube/issues"
   },
-  "homepage": "https://github.com/nomadcoders/wetube-reloaded#readme",
+  "homepage": "https://github.com/han-jojo/hantube#readme",
   "dependencies": {
     "@ffmpeg/core": "^0.8.5",
     "@ffmpeg/ffmpeg": "^0.9.7",
