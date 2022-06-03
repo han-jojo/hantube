@@ -1,7 +1,7 @@
 # Hantube
 
-- 유튜브 클론 챌린지 웹사이트
-https://hantube-hjh.herokuapp.com/
+- 유튜브 클론 챌린지 웹사이트  
+https://hantube-hjh.herokuapp.com/  
 
 ## 사용 기술 
 
