@@ -8,12 +8,12 @@ block content
         if errorMessage
             span=errorMessage
         form(method="POST", enctype="multipart/form-data")
-            label(for="video") Video File
+            label(for="video") 영상 업로드(100MB 미만)
             input(type="file", accept="video/*", required, id="video", name="video")
-            label(for="thumb") Thumbnail File
+            label(for="thumb") 썸네일 업로드
             input(type="file", accept="image/*", required, id="thumb", name="thumb")
             input(placeholder="Title", required, type="text", name="title", maxlength=80)
-            input(placeholder="Description", required, type="text", name="description", minlength=20)
+            input(placeholder="Description", required, type="text", name="description")
             input(placeholder="Hashtags, separated by comma.", required, type="text", name="hashtags")
             input(type="submit", value="Upload Video")
 

@@ -2,9 +2,11 @@
 .video-mixin {
   .video-mixin__thumb {
     height: 140px;
+    border-style: solid;
+    border-width: 1px;
     border-radius: 7px;
     width: 100%;
-    background-color: ivory;
+    background-color: black;
   }
   .video-mixin__data {
     padding: 0px 15px;
