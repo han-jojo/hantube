@@ -8,24 +8,20 @@ header
                     i.fas.fa-search
             if loggedIn
                 li
-                    a(href="/videos/upload") Upload Video
+                    a(href="/videos/upload") 영상 업로드
                 li
-                    a(href="/users/edit") Edit Profile
+                    a(href="/users/edit") 프로필 편집
                 li
-                    a(href="/users/logout")  Log Out
+                    a(href="/users/logout")  로그아웃
                 li
                     a(href=`/users/${loggedInUser._id}`)
-                        if loggedInUser.avatarUrl === ""
-                            span 😀
+                        if (!loggedInUser.avatarUrl || loggedInUser.avatarUrl == null)
+                            img(src="/public/images/no-profile.jpg", alt="no-image").header__avatar
                         else
-                            if loggedInUser.avatarUrl
-                                if loggedInUser.avatarUrl.includes("github")
-                                    img.header__avatar(src=loggedInUser.avatarUrl)
-                                else
-                                    img.header__avatar(src=loggedInUser.avatarUrl)
+                            img(src=loggedInUser.avatarUrl, alt=loggedInUser.avatarUrl).header__avatar
             else
                 li
-                    a(href="/login")  Login                        
+                    a(href="/login").header__btn  로그인                        
                 li
-                    a(href="/join").header__btn  Join
+                    a(href="/join").header__btn  회원가입
             
