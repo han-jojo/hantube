@@ -143,10 +143,12 @@ export const search = async (req, res) => {
   if (keyword) {
     videos = await Video.find({
       title: {
-        $regex: new RegExp(`${keyword}$`, "i"),
+        $regex: new RegExp(`${keyword}`, "i"),
       },
     }).populate("owner");
   }
+
+  console.log("videos: ", videos);
 
   return res.render("search", { pageTitle: "Search", videos });
 };
@@ -173,6 +175,7 @@ export const createComment = async (req, res) => {
   } = req;
 
   const video = await Video.findById(id);
+  const commentUser = await User.findById(user._id);
 
   if (!video) {
     return res.sendStatus(404);
@@ -180,6 +183,7 @@ export const createComment = async (req, res) => {
 
   const comment = await Comment.create({
     text,
+    name: user.name,
     owner: user._id,
     video: id,
   });
@@ -187,5 +191,32 @@ export const createComment = async (req, res) => {
   video.comments.push(comment._id);
   video.save();
 
-  return res.status(201).json({ newCommentId: comment._id });
+  commentUser.comments.push(comment._id);
+  commentUser.save();
+
+  return res.status(201).json({ newCommentId: comment._id, name: user.name });
+};
+
+export const deleteComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { videoId },
+    session: { user },
+  } = req;
+
+  const video = await Video.findById(videoId);
+  const commentUser = await User.findById(user._id);
+
+  if (commentUser.comments.indexOf(id) < 0) {
+    return res.sendStatus(403);
+  }
+
+  commentUser.comments.splice(commentUser.comments.indexOf(id), 1);
+  video.comments.splice(video.comments.indexOf(id), 1);
+
+  await video.save();
+  await commentUser.save();
+  await Comment.findByIdAndDelete(id);
+
+  return res.sendStatus(201);
 };
