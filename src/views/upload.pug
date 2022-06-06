@@ -3,8 +3,8 @@ extends base.pug
 block content
     div.upload__container
         div.upload__video
-            video#preview
-            button#actionBtn.social__btn Start Recording
+            //- video#preview
+            //- button#actionBtn.social__btn Start Recording
         if errorMessage
             span=errorMessage
         form(method="POST", enctype="multipart/form-data")
@@ -12,10 +12,10 @@ block content
             input(type="file", accept="video/*", required, id="video", name="video")
             label(for="thumb") 썸네일 업로드
             input(type="file", accept="image/*", required, id="thumb", name="thumb")
-            input(placeholder="Title", required, type="text", name="title", maxlength=80)
-            input(placeholder="Description", required, type="text", name="description")
-            input(placeholder="Hashtags, separated by comma.", required, type="text", name="hashtags")
-            input(type="submit", value="Upload Video")
+            input(placeholder="제목", required, type="text", name="title", maxlength=80)
+            input(placeholder="설명", required, type="text", name="description")
+            input(placeholder="해시태그 ( , 로 구분)", required, type="text", name="hashtags")
+            input(type="submit", value="업로드")
 
-block scripts
-    script(src="/static/js/recorder.js") 
+//- block scripts
+//-     script(src="/static/js/recorder.js") 

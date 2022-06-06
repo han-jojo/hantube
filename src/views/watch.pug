@@ -25,10 +25,11 @@ block content
         small.video__owner 게시자 : 
             a(href=`/users/${video.owner._id}`)=video.owner.name
         small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+        small.video__owner #{video.description}
         if String(video.owner._id) === String(loggedInUser._id)
             a(href=`${video.id}/edit`) 영상 정보 수정 &rarr;
             br
-            a(href=`${video.id}/delete`) 영상 삭제 &rarr;
+            a(href=`${video.id}/delete`)#videoDelete 영상 삭제 &rarr;
     if loggedIn
         div.video__add-comments
             form.video__comment-form#commentForm
