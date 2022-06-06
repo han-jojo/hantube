@@ -1,5 +1,6 @@
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
+const videoDelete = document.getElementById("videoDelete");
 const deleteBtn = document.querySelectorAll(".deleteBtn");
 
 const handleSubmit = async (event) => {
@@ -56,22 +57,24 @@ const handleDelete = async (event) => {
   const commentId = commentList.dataset.id;
   const videoId = videoContainer.dataset.id;
 
-  const response = await fetch(`/api/comments/${commentId}/delete`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      videoId,
-    }),
-  });
+  if (confirm("삭제하시겠습니까?")) {
+    const response = await fetch(`/api/comments/${commentId}/delete`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        videoId,
+      }),
+    });
 
-  if (response.status === 201) {
-    deleteComment(event);
-  }
+    if (response.status === 201) {
+      deleteComment(event);
+    }
 
-  if (response.status === 403) {
-    alert("댓글 작성자가 아닙니다.");
+    if (response.status === 403) {
+      alert("댓글 작성자가 아닙니다.");
+    }
   }
 };
 
@@ -80,6 +83,15 @@ const deleteComment = (event) => {
   const commentList = event.target.parentNode;
   commentContainer.removeChild(commentList);
 };
+
+const handleDeleteVideo = (event) => {
+  event.preventDefault();
+  if (confirm("삭제하시겠습니까?")) {
+    window.location.href = event.target.href;
+  }
+};
+
+videoDelete.addEventListener("click", handleDeleteVideo);
 
 if (form) {
   form.addEventListener("submit", handleSubmit);

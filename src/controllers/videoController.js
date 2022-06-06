@@ -13,6 +13,8 @@ export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comments");
 
+  //console.log("watch video : ", video);
+
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
@@ -54,7 +56,9 @@ export const postEdit = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
 
-  if (String(video.owner) !== String(_id)) {
+  const targetVideo = await Video.findById(id);
+
+  if (String(targetVideo.owner) !== String(_id)) {
     req.flash("error", "You are not the the owner of the video.");
     return res.status(403).redirect("/");
   }
