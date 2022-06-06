@@ -28,8 +28,15 @@
   .video__comment {
     padding: 10px;
     border-radius: 9999px;
-    background-color: white;
+    background-color: #b2bec3;
     color: black;
     margin-bottom: 10px;
+  }
+}
+.video__comment-form {
+  display: flex;
+  align-items: center;
+  textarea {
+    margin-right: 10px;
   }
 }
