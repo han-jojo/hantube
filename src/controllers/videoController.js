@@ -13,9 +13,7 @@ export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comments");
 
-  //console.log("watch video : ", video);
-
-  if (!video) {
+  if (!video) { //비디오 객체가 없다면 
     return res.render("404", { pageTitle: "Video not found." });
   }
 
@@ -173,20 +171,20 @@ export const registerView = async (req, res) => {
 
 export const createComment = async (req, res) => {
   const {
-    session: { user },
-    body: { text },
-    params: { id },
+    session: { user }, //세션에 저장된 유저 정보 객체
+    body: { text }, //댓글 내용
+    params: { id }, //비디오 ID
   } = req;
 
   const video = await Video.findById(id);
   const commentUser = await User.findById(user._id);
 
-  if (!video) {
+  if (!video) { //비디오를 못찾았다면
     return res.sendStatus(404);
   }
 
   const comment = await Comment.create({
-    text,
+    text: text,
     name: user.name,
     owner: user._id,
     video: id,
@@ -223,4 +221,8 @@ export const deleteComment = async (req, res) => {
   await Comment.findByIdAndDelete(id);
 
   return res.sendStatus(201);
+};
+
+export const getBoard = async (req, res) => {
+  return res.render("board", { pageTitle: "한튜브 게시판" });
 };

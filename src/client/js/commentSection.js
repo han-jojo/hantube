@@ -10,9 +10,10 @@ const handleSubmit = async (event) => {
   const videoId = videoContainer.dataset.id;
 
   if (text === "") {
+    //내용 없으면 그냥 동작 취소
     return;
   }
-
+  //ajax 요청 //HTTP 구조 이론 알아야함
   const response = await fetch(`/api/videos/${videoId}/comment`, {
     method: "POST",
     headers: {
